@@ -2,7 +2,6 @@ import type { MetaFunction } from "react-router";
 import { useState } from "react";
 import { BalenResponse } from "~/components/BalenResponse";
 import { QuestionForm } from "~/components/QuestionForm";
-import { UsageBadge } from "~/components/UsageBadge";
 
 export const meta: MetaFunction = () => [
   { title: "What Would Balen Say? 🇳🇵" },
@@ -56,7 +55,6 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-auto text-[#b0b3b8] text-xs text-center max-w-sm leading-relaxed space-y-2">
-        <UsageBadge />
         <p>
           Parody/satire · Not affiliated with Balen Shah or Syuchatar AI Compute
           · Powered by{" "}
