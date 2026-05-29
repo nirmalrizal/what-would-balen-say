@@ -26,7 +26,9 @@ export function BalenResponse({ question, onClose }: Props) {
   const [phase, setPhase] = useState<Phase>("thinking");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [queuePosition, setQueuePosition] = useState<number | null>(null);
-  const readerRef = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
+  const readerRef = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(
+    null
+  );
 
   const seed = useMemo(() => hashString(question), [question]);
   const engagement = useMemo(
@@ -35,7 +37,7 @@ export function BalenResponse({ question, onClose }: Props) {
       hearts: fakeCount(seed ^ 0xdeadbeef, 50_000, 600_000),
       prays: fakeCount(seed ^ 0xcafe, 10_000, 200_000),
     }),
-    [seed],
+    [seed]
   );
 
   useEffect(() => {
@@ -44,10 +46,9 @@ export function BalenResponse({ question, onClose }: Props) {
 
     async function fetchStream() {
       try {
-        const res = await fetch(
-          `/api/ask?q=${encodeURIComponent(question)}`,
-          { signal: controller.signal },
-        );
+        const res = await fetch(`/api/ask?q=${encodeURIComponent(question)}`, {
+          signal: controller.signal,
+        });
         if (!res.body) throw new Error("No response body");
 
         const reader = res.body.getReader();
@@ -124,20 +125,18 @@ export function BalenResponse({ question, onClose }: Props) {
             <svg
               className="w-3.5 h-3.5 text-[#1877f2] shrink-0"
               viewBox="0 0 24 24"
-              fill="currentColor"
-            >
+              fill="currentColor">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div className="text-xs text-[#b0b3b8]">
-            Prime Minister of Nepal · just now
+            Not Prime Minister of Nepal · just now
           </div>
         </div>
         <button
           onClick={onClose}
           className="text-[#b0b3b8] hover:text-white transition-colors text-xl leading-none px-1"
-          aria-label="Close"
-        >
+          aria-label="Close">
           ×
         </button>
       </div>

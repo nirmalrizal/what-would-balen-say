@@ -33,11 +33,10 @@ export default function Home() {
       <header className="text-center max-w-lg">
         <div className="text-6xl mb-4 select-none">🇳🇵</div>
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 leading-tight">
-          What Would{" "}
-          <span className="text-[#dc143c]">Balen</span> Say?
+          What Would <span className="text-[#dc143c]">Balen</span> Say?
         </h1>
         <p className="text-[#b0b3b8] text-sm">
-          Parody AI · Nepal Sarkar होइन · PM Balen Shah होइन
+          Parody AI · Not Nepal Sarkar · Not PM Balen Shah
         </p>
       </header>
 
@@ -59,14 +58,13 @@ export default function Home() {
       <footer className="mt-auto text-[#b0b3b8] text-xs text-center max-w-sm leading-relaxed space-y-2">
         <UsageBadge />
         <p>
-          Parody/satire · Not affiliated with Balen Shah or KMC ·{" "}
-          Powered by{" "}
+          Parody/satire · Not affiliated with Balen Shah or Syuchatar AI Compute
+          · Powered by{" "}
           <a
             href="https://anthropic.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6b7280] hover:text-white transition-colors"
-          >
+            className="text-[#6b7280] hover:text-white transition-colors">
             Claude AI
           </a>
         </p>

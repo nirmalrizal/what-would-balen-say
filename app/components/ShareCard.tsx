@@ -31,13 +31,13 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
         display: "flex",
         flexDirection: "column",
         padding: "48px",
-        fontFamily: '"Inter", "Noto Sans Devanagari", ui-sans-serif, sans-serif',
+        fontFamily:
+          '"Inter", "Noto Sans Devanagari", ui-sans-serif, sans-serif',
         boxSizing: "border-box",
         // Subtle crimson glow in top-right corner
         backgroundImage:
           "radial-gradient(circle at 90% 0%, rgba(220,20,60,0.12) 0%, transparent 60%)",
-      }}
-    >
+      }}>
       {/* Top branding */}
       <div
         style={{
@@ -45,8 +45,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
           alignItems: "center",
           gap: "10px",
           marginBottom: "36px",
-        }}
-      >
+        }}>
         <span style={{ fontSize: "22px" }}>🇳🇵</span>
         <span
           style={{
@@ -54,8 +53,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             fontSize: "13px",
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-          }}
-        >
+          }}>
           whatwouldbalensay.com
         </span>
       </div>
@@ -70,8 +68,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             letterSpacing: "0.12em",
             fontWeight: "600",
             marginBottom: "8px",
-          }}
-        >
+          }}>
           Asked
         </div>
         <div
@@ -82,8 +79,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             fontStyle: "italic",
             borderLeft: "2px solid #dc143c",
             paddingLeft: "12px",
-          }}
-        >
+          }}>
           &ldquo;{question}&rdquo;
         </div>
       </div>
@@ -94,8 +90,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
           flex: 1,
           display: "flex",
           alignItems: "center",
-        }}
-      >
+        }}>
         <div
           style={{
             color: "#ffffff",
@@ -104,8 +99,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             lineHeight: 1.25,
             letterSpacing: "-0.01em",
             wordBreak: "break-word",
-          }}
-        >
+          }}>
           {answer}
         </div>
       </div>
@@ -118,8 +112,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-        }}
-      >
+        }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div
             style={{
@@ -134,8 +127,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
               fontSize: "12px",
               fontWeight: "700",
               flexShrink: 0,
-            }}
-          >
+            }}>
             BS
           </div>
           <div>
@@ -147,13 +139,12 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
                 display: "flex",
                 alignItems: "center",
                 gap: "4px",
-              }}
-            >
+              }}>
               Balen{" "}
               <span style={{ color: "#1d9bf0", fontSize: "13px" }}>✓</span>
             </div>
             <div style={{ color: "#6b7280", fontSize: "11px" }}>
-              Prime Minister of Nepal
+              Not Prime Minister of Nepal
             </div>
           </div>
         </div>
@@ -163,15 +154,14 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             gap: "14px",
             color: "#6b7280",
             fontSize: "12px",
-          }}
-        >
+          }}>
           <span>👍 {likes}</span>
           <span>❤️ {hearts}</span>
           <span>🙏 {prays}</span>
         </div>
       </div>
     </div>
-  ),
+  )
 );
 
 ShareCard.displayName = "ShareCard";
