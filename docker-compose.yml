@@ -19,7 +19,8 @@ services:
       - "443:443/udp"   # HTTP/3
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data       # Persists TLS certs across restarts
+      - /home/deploy/certs:/certs:ro
+      - caddy_data:/data
       - caddy_config:/config
     depends_on:
       - app

@@ -14,3 +14,7 @@ caddy_config/
 data/
 
 todo.txt
+
+# SSL certificates
+whatwouldbalensay.com.key
+whatwouldbalensay.com.pem

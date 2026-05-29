@@ -1,5 +1,6 @@
-# Replace yourdomain.com with your actual domain
-yourdomain.com {
+whatwouldbalensay.com, www.whatwouldbalensay.com {
+    tls /certs/origin.pem /certs/origin.key
+
     # flush_interval -1 is critical for SSE streaming to work correctly
     reverse_proxy app:3000 {
         flush_interval -1
@@ -9,7 +10,6 @@ yourdomain.com {
 
     encode gzip
 
-    # Security headers
     header {
         X-Content-Type-Options nosniff
         X-Frame-Options DENY
