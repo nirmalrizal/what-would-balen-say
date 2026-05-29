@@ -10,4 +10,7 @@
 caddy_data/
 caddy_config/
 
+# Share tracking data (persisted locally on server)
+data/
+
 todo.txt
