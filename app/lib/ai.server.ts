@@ -1,4 +1,33 @@
 import Anthropic from "@anthropic-ai/sdk";
+import fs from "node:fs";
+import path from "node:path";
+
+const USAGE_FILE = path.resolve("data/usage.json");
+
+interface PersistedUsage {
+  totalInputTokens: number;
+  totalOutputTokens: number;
+  totalRequests: number;
+}
+
+function loadPersistedUsage(): PersistedUsage {
+  try {
+    const raw = fs.readFileSync(USAGE_FILE, "utf-8");
+    return JSON.parse(raw) as PersistedUsage;
+  } catch {
+    return { totalInputTokens: 0, totalOutputTokens: 0, totalRequests: 0 };
+  }
+}
+
+function persistUsage(data: PersistedUsage): void {
+  try {
+    const dir = path.dirname(USAGE_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(USAGE_FILE, JSON.stringify(data), "utf-8");
+  } catch {
+    // non-critical
+  }
+}
 
 export const MAX_QUESTION_LENGTH = 500;
 
@@ -104,10 +133,11 @@ A: I don't think. I know.`;
 const INPUT_COST_PER_TOKEN = 0.80 / 1_000_000;
 const OUTPUT_COST_PER_TOKEN = 4.00 / 1_000_000;
 
-// Module-level usage counters — persist for the life of the server process
-let totalInputTokens = 0;
-let totalOutputTokens = 0;
-let totalRequests = 0;
+// Counters loaded from disk on startup and persisted after each request
+const _saved = loadPersistedUsage();
+let totalInputTokens = _saved.totalInputTokens;
+let totalOutputTokens = _saved.totalOutputTokens;
+let totalRequests = _saved.totalRequests;
 
 export function getUsageStats() {
   return {
@@ -159,6 +189,7 @@ export async function streamBalenResponse(
     totalInputTokens += final.usage.input_tokens;
     totalOutputTokens += final.usage.output_tokens;
     totalRequests++;
+    persistUsage({ totalInputTokens, totalOutputTokens, totalRequests });
   } catch {
     // Usage tracking is non-critical; never let it break the main flow
   }
