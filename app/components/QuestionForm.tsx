@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackEvent } from "~/lib/analytics";
 
 interface Props {
   onSubmit: (question: string) => void;
@@ -15,6 +16,7 @@ export function QuestionForm({ onSubmit, isDisabled }: Props) {
     e.preventDefault();
     const q = value.trim();
     if (!q || isDisabled) return;
+    trackEvent("ask_question", { question_length: q.length });
     onSubmit(q);
     setValue("");
   };

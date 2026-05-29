@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { ShareCard } from "./ShareCard";
+import { trackEvent } from "~/lib/analytics";
 
 interface Props {
   question: string;
@@ -134,6 +135,7 @@ export function ShareButtons({ question, answer, likes, hearts, prays }: Props) 
   }
 
   async function handlePlatform(platform: Platform) {
+    trackEvent("share", { platform });
     const siteUrl = encodeURIComponent(window.location.origin);
     const tweetText = encodeURIComponent(
       `"${answer}" 🇳🇵\n\nAsk Balen anything:`,

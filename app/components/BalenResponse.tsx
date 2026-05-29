@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import { ShareButtons } from "./ShareButtons";
+import { trackEvent } from "~/lib/analytics";
 
 interface Props {
   question: string;
@@ -134,7 +135,7 @@ export function BalenResponse({ question, onClose }: Props) {
           </div>
         </div>
         <button
-          onClick={onClose}
+          onClick={() => { trackEvent("close_response", { phase }); onClose(); }}
           className="text-[#b0b3b8] hover:text-white transition-colors text-xl leading-none px-1"
           aria-label="Close">
           ×
