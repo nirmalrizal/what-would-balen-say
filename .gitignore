@@ -5,3 +5,9 @@
 # React Router
 /.react-router/
 /build/
+
+# Docker volumes (created on server)
+caddy_data/
+caddy_config/
+
+todo.txt
