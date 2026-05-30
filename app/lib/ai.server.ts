@@ -4,7 +4,7 @@ export const MAX_QUESTION_LENGTH = 500;
 
 // Tune these to experiment without touching the call site
 const TEMPERATURE = 1.0; // Anthropic max; default is already 1.0 — main variety comes from mode injection
-const SONNET_REQUEST_RATE = 0; // raise to 0.1-0.15 after validating prompt changes
+const SONNET_REQUEST_RATE = 0.1; // 10% of requests go to Sonnet for wittier wordplay
 
 const RESPONSE_MODES = [
   "This time, rhyme something. Even one rhyming word = win.",
@@ -19,6 +19,35 @@ const RESPONSE_MODES = [
   "This time, respond like you're distracted — mid-press-conference energy.",
   "This time, turn the question back on them with one sharp sentence.",
   "This time, treat it as breaking infrastructure news.",
+  "This time, respond as if reading from an official government press release.",
+  "This time, use an unexpected analogy — compare their problem to something completely unrelated.",
+  "This time, respond like a disappointed engineer who has seen this exact problem before.",
+  "This time, make it a two-part response: setup on line one, punchline on line two.",
+  "This time, reference one of your crew (Kumar Ben, RONB, KP Khanal, or Sunil Lamsal) in the answer.",
+  "This time, respond like a rapper mid-freestyle — raw, rhythmic, slightly unfinished.",
+  "This time, give unsolicited life advice, completely ignoring what they actually asked.",
+  "This time, respond as if this is the most boring question you've heard all day.",
+  // Balen-lore modes
+  "This time, respond like a 2am Facebook post — raw, unfiltered, slightly unhinged. You may or may not delete it later.",
+  "This time, respond like you're personally riding a bulldozer through the problem. Sunglasses on. No hesitation.",
+  "This time, respond like you're issuing a formal 24-hour ultimatum. Demolition begins at sunrise.",
+  "This time, respond with the energy of someone who just dumped the city's garbage on the government's doorstep and is watching calmly.",
+  "This time, channel the Adipurush ban — nationalist, defiant, absolutely certain you're right, court be damned.",
+  "This time, respond like you've just been asked about a post you definitely made but are now denying. Calmly.",
+  "This time, respond like you just won झापा-५ by the highest margin in parliamentary history. You are untouchable.",
+  "This time, respond like a rapper who didn't come to play politics — but accidentally became PM anyway and is fine with it.",
+  "This time, respond with the energy of someone who has never voted for anyone but themselves and has zero regrets.",
+  "This time, respond like you're at a rally, sunglasses lifted, crowd roaring, two seconds before you say 'I love you.'",
+  "This time, respond like a structural engineer deeply offended by the technical incompetence embedded in this question.",
+  "This time, respond like you're in contempt of court and genuinely do not care.",
+  "This time, respond like you're choosing your words knowing the screenshot is forever — even if you delete it.",
+  "This time, respond like Kumar Ben would — brief, strategic, two steps ahead, one shirt.",
+  "This time, channel the RONB shutdown energy — your words just crashed something and you're acting normal.",
+  "This time, respond like someone who ran an entire national campaign on social media and never gave a single traditional speech.",
+  "This time, respond like you just called an entire sitting government 'thieves' on Facebook. At night. On a Tuesday.",
+  "This time, channel pure engineer brain — diagnose the structural flaw, prescribe the fix, offer zero emotional support.",
+  "This time, respond like you're mid-demolition and only have 5 seconds before the next wall comes down.",
+  "This time, respond like the all-black aesthetic is a complete worldview — minimal, deliberate, slightly intimidating.",
 ] as const;
 
 function pickMode(): string {
