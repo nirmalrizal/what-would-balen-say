@@ -6,6 +6,7 @@ interface ShareCardProps {
   likes: string;
   hearts: string;
   prays: string;
+  siteUrl?: string;
 }
 
 function answerFontSize(text: string): string {
@@ -33,7 +34,7 @@ const dividerStyle: React.CSSProperties = {
 };
 
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
-  ({ question, answer, likes, hearts, prays }, ref) => (
+  ({ question, answer, likes, hearts, prays, siteUrl }, ref) => (
     <div
       ref={ref}
       style={{
@@ -152,6 +153,27 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             <span>{count}</span>
           </div>
         ))}
+      </div>
+
+      {/* Branding */}
+      <div
+        style={{
+          padding: "10px 20px",
+          borderTop: "1px solid #3a3b3c",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ color: "#ffffff", fontSize: "13px", fontWeight: "700" }}>
+          What Would Balen Say?
+        </div>
+        <div style={{ color: "#b0b3b8", fontSize: "11px", marginTop: "2px" }}>
+          Parody AI · Not Nepal Sarkar · Not PM Balen Shah
+        </div>
+        {siteUrl && (
+          <div style={{ color: "#6b6f76", fontSize: "10px", marginTop: "4px" }}>
+            {siteUrl}
+          </div>
+        )}
       </div>
     </div>
   )

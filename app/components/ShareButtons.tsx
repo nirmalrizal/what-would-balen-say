@@ -243,6 +243,7 @@ export function ShareButtons({ question, answer, likes, hearts, prays }: Props) 
           likes={likes}
           hearts={hearts}
           prays={prays}
+          siteUrl="https://whatwouldbalensay.com"
         />
       </div>
 
