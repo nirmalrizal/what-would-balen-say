@@ -22,9 +22,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
     <div
       ref={ref}
       style={{
-        position: "fixed",
-        left: "-9999px",
-        top: 0,
+        position: "relative",
         width: "600px",
         height: "600px",
         backgroundColor: "#0d0e10",

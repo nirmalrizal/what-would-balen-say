@@ -16,7 +16,13 @@ async function captureCard(el: HTMLDivElement): Promise<Blob> {
   // Dynamic import keeps this out of the SSR bundle
   const { toPng } = await import("html-to-image");
   await document.fonts.ready;
-  const dataUrl = await toPng(el, { pixelRatio: 2, cacheBust: true });
+  const dataUrl = await toPng(el, {
+    pixelRatio: 2,
+    cacheBust: true,
+    backgroundColor: "#0d0e10",
+    width: 600,
+    height: 600,
+  });
   const res = await fetch(dataUrl);
   return res.blob();
 }
@@ -218,15 +224,28 @@ export function ShareButtons({ question, answer, likes, hearts, prays }: Props) 
 
   return (
     <div className="px-4 pb-4">
-      {/* Off-screen share card — must be in DOM for capture */}
-      <ShareCard
-        ref={cardRef}
-        question={question}
-        answer={answer}
-        likes={likes}
-        hearts={hearts}
-        prays={prays}
-      />
+      {/* Clip container hides the card without off-screen positioning */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: 0,
+          height: 0,
+          overflow: "hidden",
+          pointerEvents: "none",
+        }}
+      >
+        <ShareCard
+          ref={cardRef}
+          question={question}
+          answer={answer}
+          likes={likes}
+          hearts={hearts}
+          prays={prays}
+        />
+      </div>
 
       <p className="text-[#6b7280] text-xs mb-2 uppercase tracking-wider font-medium">
         Share
