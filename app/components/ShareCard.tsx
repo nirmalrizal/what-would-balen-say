@@ -8,15 +8,30 @@ interface ShareCardProps {
   prays: string;
 }
 
-// Font size scales down for longer answers so text always fits
 function answerFontSize(text: string): string {
-  if (text.length < 20) return "52px";
-  if (text.length < 40) return "40px";
-  if (text.length < 70) return "30px";
-  return "24px";
+  if (text.length < 30) return "36px";
+  if (text.length < 60) return "28px";
+  if (text.length < 100) return "24px";
+  return "20px";
 }
 
-// Rendered off-screen at 600×600, captured at 2× → 1200×1200
+const labelStyle: React.CSSProperties = {
+  color: "#b0b3b8",
+  fontSize: "11px",
+  textTransform: "uppercase",
+  letterSpacing: "0.08em",
+  fontWeight: "600",
+  marginBottom: "6px",
+};
+
+const dividerStyle: React.CSSProperties = {
+  margin: "0 20px",
+  borderTop: "1px solid #3a3b3c",
+  borderBottom: "none",
+  borderLeft: "none",
+  borderRight: "none",
+};
+
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
   ({ question, answer, likes, hearts, prays }, ref) => (
     <div
@@ -24,139 +39,119 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
       style={{
         position: "relative",
         width: "600px",
-        height: "600px",
-        backgroundColor: "#0d0e10",
-        display: "flex",
-        flexDirection: "column",
-        padding: "48px",
         fontFamily:
           '"Inter", "Noto Sans Devanagari", ui-sans-serif, sans-serif',
+        backgroundColor: "#1c1e21",
+        border: "1px solid #3a3b3c",
+        borderRadius: "12px",
+        overflow: "hidden",
         boxSizing: "border-box",
-        // Subtle crimson glow in top-right corner
-        backgroundImage:
-          "radial-gradient(circle at 90% 0%, rgba(220,20,60,0.12) 0%, transparent 60%)",
-      }}>
-      {/* Top branding */}
+      }}
+    >
+      {/* Header */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "10px",
-          marginBottom: "36px",
-        }}>
-        <span style={{ fontSize: "22px" }}>🇳🇵</span>
-        <span
+          gap: "12px",
+          padding: "16px 20px",
+          borderBottom: "1px solid #3a3b3c",
+        }}
+      >
+        <div
           style={{
-            color: "#4b5563",
-            fontSize: "13px",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}>
-          whatwouldbalensay.com
-        </span>
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            backgroundColor: "#dc143c",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            fontWeight: "700",
+            fontSize: "14px",
+            flexShrink: 0,
+          }}
+        >
+          BS
+        </div>
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              fontWeight: "600",
+              color: "#ffffff",
+              fontSize: "14px",
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+            }}
+          >
+            Balen
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877f2">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div style={{ fontSize: "12px", color: "#b0b3b8" }}>
+            Not Prime Minister of Nepal · just now
+          </div>
+        </div>
       </div>
 
       {/* Question */}
-      <div style={{ marginBottom: "28px" }}>
-        <div
-          style={{
-            color: "#dc143c",
-            fontSize: "11px",
-            textTransform: "uppercase",
-            letterSpacing: "0.12em",
-            fontWeight: "600",
-            marginBottom: "8px",
-          }}>
-          Asked
-        </div>
-        <div
-          style={{
-            color: "#9ca3af",
-            fontSize: "16px",
-            lineHeight: 1.5,
-            fontStyle: "italic",
-            borderLeft: "2px solid #dc143c",
-            paddingLeft: "12px",
-          }}>
-          &ldquo;{question}&rdquo;
-        </div>
+      <div style={{ padding: "16px 20px 12px" }}>
+        <p style={labelStyle}>Question</p>
+        <p style={{ color: "#e4e6eb", fontSize: "14px", lineHeight: 1.5 }}>
+          {question}
+        </p>
       </div>
 
-      {/* Answer — the hero */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-        }}>
-        <div
+      <hr style={dividerStyle} />
+
+      {/* Answer */}
+      <div style={{ padding: "16px 20px 20px" }}>
+        <p style={labelStyle}>Balen says</p>
+        <p
           style={{
             color: "#ffffff",
             fontSize: answerFontSize(answer),
             fontWeight: "700",
-            lineHeight: 1.25,
-            letterSpacing: "-0.01em",
+            lineHeight: 1.3,
+            letterSpacing: "0.01em",
             wordBreak: "break-word",
-          }}>
+            margin: 0,
+          }}
+        >
           {answer}
-        </div>
+        </p>
       </div>
 
-      {/* Footer */}
+      {/* Engagement footer */}
       <div
         style={{
-          borderTop: "1px solid #1f2937",
-          paddingTop: "20px",
+          padding: "12px 20px 16px",
+          borderTop: "1px solid #3a3b3c",
           display: "flex",
-          justifyContent: "space-between",
+          gap: "20px",
+          color: "#b0b3b8",
+          fontSize: "13px",
           alignItems: "center",
-        }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        }}
+      >
+        {(
+          [
+            ["👍", likes],
+            ["❤️", hearts],
+            ["🙏", prays],
+          ] as [string, string][]
+        ).map(([emoji, count]) => (
           <div
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "50%",
-              backgroundColor: "#dc143c",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-              fontSize: "12px",
-              fontWeight: "700",
-              flexShrink: 0,
-            }}>
-            BS
+            key={emoji}
+            style={{ display: "flex", alignItems: "center", gap: "5px" }}
+          >
+            <span style={{ fontSize: "16px", lineHeight: 1 }}>{emoji}</span>
+            <span>{count}</span>
           </div>
-          <div>
-            <div
-              style={{
-                color: "#fff",
-                fontSize: "14px",
-                fontWeight: "600",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-              }}>
-              Balen{" "}
-              <span style={{ color: "#1d9bf0", fontSize: "13px" }}>✓</span>
-            </div>
-            <div style={{ color: "#6b7280", fontSize: "11px" }}>
-              Not Prime Minister of Nepal
-            </div>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "14px",
-            color: "#6b7280",
-            fontSize: "12px",
-          }}>
-          <span>👍 {likes}</span>
-          <span>❤️ {hearts}</span>
-          <span>🙏 {prays}</span>
-        </div>
+        ))}
       </div>
     </div>
   )

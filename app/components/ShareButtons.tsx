@@ -19,9 +19,8 @@ async function captureCard(el: HTMLDivElement): Promise<Blob> {
   const dataUrl = await toPng(el, {
     pixelRatio: 2,
     cacheBust: true,
-    backgroundColor: "#0d0e10",
+    backgroundColor: "#1c1e21",
     width: 600,
-    height: 600,
   });
   const res = await fetch(dataUrl);
   return res.blob();
