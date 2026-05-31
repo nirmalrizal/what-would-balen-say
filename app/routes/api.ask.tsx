@@ -6,6 +6,7 @@ import {
 } from "~/lib/rate-limit.server";
 import { claudeQueue, getQueueSize } from "~/lib/queue.server";
 import { streamBalenResponse, MAX_QUESTION_LENGTH } from "~/lib/ai.server";
+import { logQA } from "~/lib/qa-log.server";
 
 const SSE_HEADERS = {
   "Content-Type": "text/event-stream",
@@ -58,14 +59,21 @@ export async function loader({ request }: LoaderFunctionArgs) {
       }
 
       try {
+        const tokens: string[] = [];
         await claudeQueue.add(async () => {
           await streamBalenResponse(
             q,
-            (token) => controller.enqueue(sseJson({ token })),
+            (token) => {
+              tokens.push(token);
+              controller.enqueue(sseJson({ token }));
+            },
             request.signal,
           );
         });
         controller.enqueue(sseMsg("[DONE]"));
+        try {
+          logQA(q, tokens.join(""), ip);
+        } catch {}
       } catch (err) {
         if ((err as Error)?.name !== "AbortError") {
           controller.enqueue(

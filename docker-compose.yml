@@ -9,6 +9,8 @@ services:
     # Not exposed publicly — Caddy is the only ingress
     expose:
       - "3000"
+    volumes:
+      - ./data:/app/data
 
   caddy:
     image: caddy:2-alpine
