@@ -33,6 +33,59 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "What Would Balen Say?",
+                url: "https://whatwouldbalensay.com",
+                description:
+                  "Parody AI that responds in the style of Balen Shah, Prime Minister of Nepal.",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "What would Balen Shah say about traffic in Kathmandu?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Roads do not fix themselves. Systems do. Where is the system? Fix it.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What would Balen Shah say about corruption?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Corruption is a choice. Choose differently.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What would Balen Shah say about his vision for Nepal?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Accountability. Transparency. Work. In that order.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What would Balen Shah say about young Nepalis going abroad?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Go. Learn. Come back. Build. Or stay. But build.",
+                    },
+                  },
+                ],
+              },
+            ]),
+          }}
+        />
         {GA_ID && (
           <>
             <script
