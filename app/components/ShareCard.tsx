@@ -93,7 +93,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
             </svg>
           </div>
           <div style={{ fontSize: "12px", color: "#b0b3b8" }}>
-            Not Prime Minister of Nepal · just now
+            Not Prime Minister of Nepal · But Claude AI · just now
           </div>
         </div>
       </div>

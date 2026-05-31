@@ -42,6 +42,17 @@ export function BalenResponse({ question, onClose }: Props) {
   );
 
   useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        trackEvent("close_response", { phase });
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [phase, onClose]);
+
+  useEffect(() => {
     const controller = new AbortController();
     let buffer = "";
 
@@ -131,7 +142,7 @@ export function BalenResponse({ question, onClose }: Props) {
             </svg>
           </div>
           <div className="text-xs text-[#b0b3b8]">
-            Not Prime Minister of Nepal · just now
+            Not Prime Minister of Nepal · But Claude AI · just now
           </div>
         </div>
         <button
@@ -196,6 +207,18 @@ export function BalenResponse({ question, onClose }: Props) {
               hearts={engagement.hearts}
               prays={engagement.prays}
             />
+          </div>
+
+          <div className="border-t border-[#3a3b3c]">
+            <button
+              onClick={() => { trackEvent("ask_again", { phase }); onClose(); }}
+              className="w-full flex items-center justify-center gap-2 py-3 text-sm text-[#b0b3b8] hover:text-white hover:bg-[#3a3b3c] transition-colors">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+              Ask Another Question
+            </button>
           </div>
         </>
       )}
