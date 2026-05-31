@@ -18,3 +18,6 @@ todo.txt
 # SSL certificates
 whatwouldbalensay.com.key
 whatwouldbalensay.com.pem
+
+
+.claude-flow/**
