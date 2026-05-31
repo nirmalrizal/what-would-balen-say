@@ -4,7 +4,7 @@ export const MAX_QUESTION_LENGTH = 500;
 
 // Tune these to experiment without touching the call site
 const TEMPERATURE = 1.0; // Anthropic max; default is already 1.0 — main variety comes from mode injection
-const SONNET_REQUEST_RATE = 0.25; // 25% of requests go to Sonnet for wittier wordplay
+const MODEL = "claude-opus-4-8"; // fully Opus while monitoring cost
 
 const RESPONSE_MODES = [
   "This time, rhyme exactly one word pair — the more unexpected the rhyme the better. Compression first, rhyme as bonus.",
@@ -488,14 +488,9 @@ export async function streamBalenResponse(
   onToken: (text: string) => void,
   signal?: AbortSignal,
 ): Promise<void> {
-  const model =
-    Math.random() < SONNET_REQUEST_RATE
-      ? "claude-sonnet-4-6"
-      : "claude-haiku-4-5-20251001";
-
   const stream = getClient().messages.stream(
     {
-      model,
+      model: MODEL,
       max_tokens: 100,
       temperature: TEMPERATURE,
       system: buildSystemPrompt(pickMode()),
